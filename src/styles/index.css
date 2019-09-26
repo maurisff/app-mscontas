@@ -1,0 +1,26 @@
+
+.app-main{
+  min-height: 100%
+}
+
+.app-container {
+  padding: 20px;
+}
+
+.vue-notification {
+  padding: 10px;
+  margin: 15px;
+  font-size: 18px;
+  font-family: "Noto Sans", sans-serif;
+  color: #ffffff;
+  background: #44A4FC;
+  border-left: 5px solid #187FE7;
+}
+
+.progressProcessando {
+  top: 40%;
+  left: 40%;
+  position: absolute;
+  text-align: center;
+  margin: 2rem;
+}
