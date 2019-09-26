@@ -1,4 +1,4 @@
-# app001
+# app-mscontas
 
 ## Project setup
 ```
