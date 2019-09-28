@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "app-mscontas",
+    "dev": "dev-mscontas"
+  }
+}

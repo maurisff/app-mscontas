@@ -1,10 +1,15 @@
 {
-  "name": "app001",
-  "version": "0.1.0",
+  "name": "ms-contas",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "deploy": "firebase login && firebase use default && vue-cli-service build && firebase deploy --project default",
+    "buildDemo": "vue-cli-service build --mode staging",
+    "deployDemo": "firebase login && firebase use demo && vue-cli-service build --mode staging && firebase deploy --project demo && firebase use default",
+    "buildDev": "vue-cli-service build --mode herokudev",
+    "deployDev": "firebase login && firebase use dev-mscontas && vue-cli-service build --mode herokudev && firebase deploy --project dev-mscontas && firebase use default",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
