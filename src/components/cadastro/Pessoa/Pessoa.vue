@@ -126,6 +126,10 @@
         type: Boolean,
         default: false
       },
+      createData:{
+        type: Boolean,
+        default: false
+      }
     },
     data(){
       return {
@@ -243,9 +247,18 @@
       },
       async close (refreshData = false) {
         this.dialog = false
+        if (this.createData && refreshData){
+          if (this.model && this.model._id){
+            this.$emit('input', this.model)
+          } else {
+            this.$emit('input', null)
+          }
+          this.$emit('exit', true)
+        }
         setTimeout(() => {
           this.model = this.defaulModel;
         }, 300);
+        
         if (refreshData === true){
           await this.fetchData()
         }
@@ -260,7 +273,7 @@
                 vm.model.updatedAt = Date.now
                 await app.put('api/pessoa/'+vm.model._id, vm.model).then(async (response) => {
                   if (response.status === 200 && response.data && response.data.success){
-                    vm.$store.dispatch('app/setMessage',{ type: 'info', message: 'Registro atualizado com sucesso!' }, { root: true });            
+                    vm.$store.dispatch('app/setMessage',{ type: 'info', message: 'Registro atualizado com sucesso!' }, { root: true });
                     vm.$store.dispatch('app/setProcessing', null, { root: true });
                     vm.close(true)
                   } else {

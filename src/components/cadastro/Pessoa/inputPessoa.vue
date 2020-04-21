@@ -18,9 +18,9 @@
     solo
     return-object >
     <template v-slot:no-data>
-      <v-list-item v-if="search && !isLoading">
+      <v-list-item v-if="search && !isLoading" @click="CriarPessoa(search)">
         <v-list-item-title>
-          {{(search ? `Nenhum pessoa cadastrada como ${search}` : '')}}
+          {{(search ? `Nenhuma pessoa cadastrada como ${search}. Cadastra-la?` : '')}}
         </v-list-item-title>
       </v-list-item>
       <div v-else></div>
@@ -46,18 +46,25 @@
       </v-list-item-content>
     </template>
   </v-autocomplete>
+  <cadastroPessoa v-model="model" createData="createData" ><cadastroPessoa>
   </v-card>
 </template>
 <script>
   import app from '@/services/app'
+  
+  import cadastroPessoa from '@/components/cadastro/Pessoa/Pessoa'
   export default {
     name: 'component.cadastro.InputPessoa',
+    components: {
+      cadastroPessoa,
+    },
     data(){
       return {
         model: null,
         data: [],
         search: null,
         isLoading: false,
+        createData: false
       }
     },
     props: {
@@ -79,6 +86,7 @@
       },
       model (val) {
         this.search = null
+        this.createData = false
         this.$emit('input', val)
       },
       async search (val) {
@@ -119,6 +127,10 @@
                   : null)
 
       },
+      CriarPessoa(name){        
+        this.$store.dispatch('app/setMessage',{ type: 'info', message: 'Debug... Adicionando nova Pessoa: '+ name}, { root: true });
+        this.createData = true
+      }
     },
     mounted(){
     },
